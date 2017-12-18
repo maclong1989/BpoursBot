@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bpours.dao.mybatis.mapper.SifCardsMapper">
+  <resultMap id="BaseResultMap" type="org.bpours.dao.mybatis.pojo.SifCards">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="unit_number" jdbcType="INTEGER" property="unitNumber" />
+    <result column="normal_live_asset" jdbcType="VARCHAR" property="normalLiveAsset" />
+    <result column="rank_max_live_asset" jdbcType="VARCHAR" property="rankMaxLiveAsset" />
+    <result column="eponym" jdbcType="VARCHAR" property="eponym" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="rarity" jdbcType="INTEGER" property="rarity" />
+    <result column="attribute" jdbcType="INTEGER" property="attribute" />
+    <result column="unit_type_id" jdbcType="INTEGER" property="unitTypeId" />
+    <result column="tokuten" jdbcType="INTEGER" property="tokuten" />
+    <result column="skill_trigger_type" jdbcType="INTEGER" property="skillTriggerType" />
+    <result column="skill_type" jdbcType="INTEGER" property="skillType" />
+    <result column="skill_id" jdbcType="INTEGER" property="skillId" />
+    <result column="leader_skill_id" jdbcType="INTEGER" property="leaderSkillId" />
+    <result column="before_level_max" jdbcType="INTEGER" property="beforeLevelMax" />
+    <result column="after_level_max" jdbcType="INTEGER" property="afterLevelMax" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, unit_number, normal_live_asset, rank_max_live_asset, eponym, name, rarity, attribute, 
+    unit_type_id, tokuten, skill_trigger_type, skill_type, skill_id, leader_skill_id, 
+    before_level_max, after_level_max
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bpours_sif_cards
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bpours_sif_cards
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.bpours.dao.mybatis.pojo.SifCards">
+    insert into bpours_sif_cards (id, unit_number, normal_live_asset, 
+      rank_max_live_asset, eponym, name, 
+      rarity, attribute, unit_type_id, 
+      tokuten, skill_trigger_type, skill_type, 
+      skill_id, leader_skill_id, before_level_max, 
+      after_level_max)
+    values (#{id,jdbcType=INTEGER}, #{unitNumber,jdbcType=INTEGER}, #{normalLiveAsset,jdbcType=VARCHAR}, 
+      #{rankMaxLiveAsset,jdbcType=VARCHAR}, #{eponym,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{rarity,jdbcType=INTEGER}, #{attribute,jdbcType=INTEGER}, #{unitTypeId,jdbcType=INTEGER}, 
+      #{tokuten,jdbcType=INTEGER}, #{skillTriggerType,jdbcType=INTEGER}, #{skillType,jdbcType=INTEGER}, 
+      #{skillId,jdbcType=INTEGER}, #{leaderSkillId,jdbcType=INTEGER}, #{beforeLevelMax,jdbcType=INTEGER}, 
+      #{afterLevelMax,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.bpours.dao.mybatis.pojo.SifCards">
+    insert into bpours_sif_cards
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="unitNumber != null">
+        unit_number,
+      </if>
+      <if test="normalLiveAsset != null">
+        normal_live_asset,
+      </if>
+      <if test="rankMaxLiveAsset != null">
+        rank_max_live_asset,
+      </if>
+      <if test="eponym != null">
+        eponym,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="rarity != null">
+        rarity,
+      </if>
+      <if test="attribute != null">
+        attribute,
+      </if>
+      <if test="unitTypeId != null">
+        unit_type_id,
+      </if>
+      <if test="tokuten != null">
+        tokuten,
+      </if>
+      <if test="skillTriggerType != null">
+        skill_trigger_type,
+      </if>
+      <if test="skillType != null">
+        skill_type,
+      </if>
+      <if test="skillId != null">
+        skill_id,
+      </if>
+      <if test="leaderSkillId != null">
+        leader_skill_id,
+      </if>
+      <if test="beforeLevelMax != null">
+        before_level_max,
+      </if>
+      <if test="afterLevelMax != null">
+        after_level_max,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="unitNumber != null">
+        #{unitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="normalLiveAsset != null">
+        #{normalLiveAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="rankMaxLiveAsset != null">
+        #{rankMaxLiveAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="eponym != null">
+        #{eponym,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rarity != null">
+        #{rarity,jdbcType=INTEGER},
+      </if>
+      <if test="attribute != null">
+        #{attribute,jdbcType=INTEGER},
+      </if>
+      <if test="unitTypeId != null">
+        #{unitTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="tokuten != null">
+        #{tokuten,jdbcType=INTEGER},
+      </if>
+      <if test="skillTriggerType != null">
+        #{skillTriggerType,jdbcType=INTEGER},
+      </if>
+      <if test="skillType != null">
+        #{skillType,jdbcType=INTEGER},
+      </if>
+      <if test="skillId != null">
+        #{skillId,jdbcType=INTEGER},
+      </if>
+      <if test="leaderSkillId != null">
+        #{leaderSkillId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeLevelMax != null">
+        #{beforeLevelMax,jdbcType=INTEGER},
+      </if>
+      <if test="afterLevelMax != null">
+        #{afterLevelMax,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bpours.dao.mybatis.pojo.SifCards">
+    update bpours_sif_cards
+    <set>
+      <if test="unitNumber != null">
+        unit_number = #{unitNumber,jdbcType=INTEGER},
+      </if>
+      <if test="normalLiveAsset != null">
+        normal_live_asset = #{normalLiveAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="rankMaxLiveAsset != null">
+        rank_max_live_asset = #{rankMaxLiveAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="eponym != null">
+        eponym = #{eponym,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rarity != null">
+        rarity = #{rarity,jdbcType=INTEGER},
+      </if>
+      <if test="attribute != null">
+        attribute = #{attribute,jdbcType=INTEGER},
+      </if>
+      <if test="unitTypeId != null">
+        unit_type_id = #{unitTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="tokuten != null">
+        tokuten = #{tokuten,jdbcType=INTEGER},
+      </if>
+      <if test="skillTriggerType != null">
+        skill_trigger_type = #{skillTriggerType,jdbcType=INTEGER},
+      </if>
+      <if test="skillType != null">
+        skill_type = #{skillType,jdbcType=INTEGER},
+      </if>
+      <if test="skillId != null">
+        skill_id = #{skillId,jdbcType=INTEGER},
+      </if>
+      <if test="leaderSkillId != null">
+        leader_skill_id = #{leaderSkillId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeLevelMax != null">
+        before_level_max = #{beforeLevelMax,jdbcType=INTEGER},
+      </if>
+      <if test="afterLevelMax != null">
+        after_level_max = #{afterLevelMax,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bpours.dao.mybatis.pojo.SifCards">
+    update bpours_sif_cards
+    set unit_number = #{unitNumber,jdbcType=INTEGER},
+      normal_live_asset = #{normalLiveAsset,jdbcType=VARCHAR},
+      rank_max_live_asset = #{rankMaxLiveAsset,jdbcType=VARCHAR},
+      eponym = #{eponym,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      rarity = #{rarity,jdbcType=INTEGER},
+      attribute = #{attribute,jdbcType=INTEGER},
+      unit_type_id = #{unitTypeId,jdbcType=INTEGER},
+      tokuten = #{tokuten,jdbcType=INTEGER},
+      skill_trigger_type = #{skillTriggerType,jdbcType=INTEGER},
+      skill_type = #{skillType,jdbcType=INTEGER},
+      skill_id = #{skillId,jdbcType=INTEGER},
+      leader_skill_id = #{leaderSkillId,jdbcType=INTEGER},
+      before_level_max = #{beforeLevelMax,jdbcType=INTEGER},
+      after_level_max = #{afterLevelMax,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectCardsInfos" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from bpours_sif_cards
+    where 
+    	(name like concat('%', #{search},'%')
+    	or eponym like concat('%', #{search},'%'))
+    order by id desc
+  	limit 0,3
+  </select>
+</mapper>

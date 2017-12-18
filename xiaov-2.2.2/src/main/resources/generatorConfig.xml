@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="D:\work\workspace17\taikang-yq-web\WebRoot\WEB-INF\lib\mysql-connector-java-5.0.8-bin.jar"/>
+            location="D:\workspace\SpringMVC_Spring_mybatis\WebRoot\WEB-INF\lib\sql\mysql-connector-java-5.1.7-bin.jar"/>
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="false"/>
@@ -34,7 +34,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="bpours_answer" domainObjectName="Answer"
+        <table tableName="bpours_sif_cards" domainObjectName="SifCards"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

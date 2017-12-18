@@ -6,8 +6,10 @@
 
 package org.bpours.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.bpours.dao.mybatis.mapper.AnswerMapper;
 import org.bpours.dao.mybatis.pojo.Answer;
+import org.bpours.sif.service.SifService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,35 +27,42 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswerService {
 
-    @Autowired
-    private AnswerMapper answerMapper;
+	@Autowired
+	private AnswerMapper answerMapper;
 
-    public String answer(final String content, final String userName) {
+	@Autowired
+	private SifService sifService;
 
-        if (!content.matches(".+ .+")) {
-            return "";
-        }
+	public String answer(final String content, final String userName) {
 
-        String keyword = content.split(" ", 2)[1];
+		if (!content.matches(".+ .+")) {
+			return "";
+		}
 
-        // if (keyword.startsWith("学习") && keyword.matches("学习 [^ ]+ [^ ]+")) {
-        // String[] newKwyWords = keyword.split(" ");
-        // Answer answer = new Answer();
-        // answer.setKeyword(newKwyWords[1]);
-        // answer.setAnswer(newKwyWords[2]);
-        //
-        // answerMapper.insert(answer);
-        // }
+		String keyword = content.split(" ", 2)[1];
 
-        Answer answer = answerMapper.selectByPrimaryKey(keyword);
+		String ret = sifService.processSifService(keyword, userName);
 
-        if (answer != null) {
-            return answer.getAnswer();
-        }
+		if (StringUtils.isNotEmpty(ret)) {
+			return ret;
+		}
 
+		// if (keyword.startsWith("学习") && keyword.matches("学习 [^ ]+ [^ ]+")) {
+		// String[] newKwyWords = keyword.split(" ");
+		// Answer answer = new Answer();
+		// answer.setKeyword(newKwyWords[1]);
+		// answer.setAnswer(newKwyWords[2]);
+		//
+		// answerMapper.insert(answer);
+		// }
 
-        return "";
-    }
+		Answer answer = answerMapper.selectByPrimaryKey(keyword);
+
+		if (answer != null) {
+			return answer.getAnswer();
+		}
+
+		return "";
+	}
 
 }
-
