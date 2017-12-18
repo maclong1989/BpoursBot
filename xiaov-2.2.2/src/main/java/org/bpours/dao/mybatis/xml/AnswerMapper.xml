@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bpours.dao.mybatis.mapper.AnswerMapper">
+  <resultMap id="BaseResultMap" type="org.bpours.dao.mybatis.pojo.Answer">
+    <id column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    keyword, answer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bpours_answer
+    where keyword = #{keyword,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from bpours_answer
+    where keyword = #{keyword,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.bpours.dao.mybatis.pojo.Answer">
+    insert into bpours_answer (keyword, answer)
+    values (#{keyword,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.bpours.dao.mybatis.pojo.Answer">
+    insert into bpours_answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bpours.dao.mybatis.pojo.Answer">
+    update bpours_answer
+    <set>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where keyword = #{keyword,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bpours.dao.mybatis.pojo.Answer">
+    update bpours_answer
+    set answer = #{answer,jdbcType=VARCHAR}
+    where keyword = #{keyword,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,5 @@
+target/
+*.log
+qrcode.png
+.idea/
+xiaov.iml
