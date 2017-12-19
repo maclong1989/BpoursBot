@@ -7,6 +7,7 @@
 package org.bpours.service;
 
 import org.apache.commons.lang.StringUtils;
+import org.b3log.xiaov.util.XiaoVs;
 import org.bpours.dao.mybatis.mapper.AnswerMapper;
 import org.bpours.dao.mybatis.pojo.Answer;
 import org.bpours.sif.service.SifService;
@@ -35,7 +36,7 @@ public class AnswerService {
 
 	public String answer(final String content, final String userName) {
 
-		if (!content.matches(".+ .+")) {
+		if (!content.matches(".+\\s.+")) {
 			return "";
 		}
 
@@ -47,14 +48,65 @@ public class AnswerService {
 			return ret;
 		}
 
-		// if (keyword.startsWith("学习") && keyword.matches("学习 [^ ]+ [^ ]+")) {
-		// String[] newKwyWords = keyword.split(" ");
-		// Answer answer = new Answer();
-		// answer.setKeyword(newKwyWords[1]);
-		// answer.setAnswer(newKwyWords[2]);
-		//
-		// answerMapper.insert(answer);
-		// }
+		ret = repeater(keyword, userName);
+
+		if (StringUtils.isNotEmpty(ret)) {
+			return ret;
+		}
+
+		ret = study(keyword, userName);
+
+		if (StringUtils.isNotEmpty(ret)) {
+			return ret;
+		}
+
+		ret = keywordAnswer(keyword, userName);
+
+		if (StringUtils.isNotEmpty(ret)) {
+			return ret;
+		}
+
+		return ret;
+	}
+
+	private String repeater(final String keyword, final String userName) {
+
+		if (keyword.startsWith("复读机") && keyword.matches("复读机\\s+.*")) {
+			String[] newKwyWords = keyword.split("\\s+", 2);
+			String content = newKwyWords[1].replace("复读机", "").replace(XiaoVs.QQ_BOT_NAME, "");
+			StringBuilder sb = new StringBuilder();
+
+			for (int i = 0; i < 2; i++) {
+				sb.append(content);
+				if (i != 1) {
+					sb.append("<br/>");
+				}
+			}
+
+			return sb.toString();
+
+		}
+
+		return "";
+	}
+
+	private String study(final String keyword, final String userName) {
+
+		if (keyword.startsWith("学习") && keyword.matches("学习\\s+.*")) {
+			String[] newKwyWords = keyword.split("\\s+", 3);
+			Answer answer = new Answer();
+			answer.setKeyword(newKwyWords[1]);
+			answer.setAnswer(newKwyWords[2]);
+
+			answerMapper.insert(answer);
+
+			return "学习成功";
+		}
+
+		return "";
+	}
+
+	private String keywordAnswer(final String keyword, final String userName) {
 
 		Answer answer = answerMapper.selectByPrimaryKey(keyword);
 
