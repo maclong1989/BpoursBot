@@ -232,4 +232,29 @@
     order by id desc
   	limit 0,3
   </select>
+  <select id="selectCountOfCards" resultType="java.lang.Integer">
+  	select count(1) from bpours_sif_cards
+  </select>
+  <select id="selectCardsByIds" resultMap="BaseResultMap">
+  	 select
+  	 <include refid="Base_Column_List" />  
+     from bpours_sif_cards 
+     where id in  
+     <foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+     	#{item}  
+     </foreach>  
+  	
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	 select
+  	 id,rarity,unit_type_id
+     from bpours_sif_cards 
+     where
+     	rarity > 1
+     and (
+     	(unit_type_id between 1 and 9)
+     	or
+     	(unit_type_id between 101 and 109)
+     )
+  </select>
 </mapper>

@@ -18,4 +18,10 @@ public interface SifCardsMapper {
 	int updateByPrimaryKey(SifCards record);
 
 	List<SifCards> selectCardsInfos(String search);
+
+	Integer selectCountOfCards();
+
+	List<SifCards> selectCardsByIds(List<Integer> ids);
+
+	List<SifCards> selectAll();
 }
