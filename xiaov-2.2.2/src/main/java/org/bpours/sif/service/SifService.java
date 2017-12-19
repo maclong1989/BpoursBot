@@ -71,7 +71,11 @@ public class SifService implements InitializingBean {
 		}
 
 		if (keyword.startsWith("抽卡")) {
-			ret = processPick(keyword, userName);
+			ret = processPick(keyword, userName, 10);
+		}
+
+		if (keyword.startsWith("单抽")) {
+			ret = processPick(keyword, userName, 1);
 		}
 
 		return ret;
@@ -148,7 +152,7 @@ public class SifService implements InitializingBean {
 		return ret;
 	}
 
-	private String processPick(final String keyword, final String userName) {
+	private String processPick(final String keyword, final String userName, final int num) {
 
 		String ret = "";
 
@@ -170,7 +174,7 @@ public class SifService implements InitializingBean {
 
 			List<Integer> ids = new ArrayList<>();
 
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < num; i++) {
 				int rand = RandomUtils.nextInt(100);
 
 				Integer rarity = null;
@@ -212,6 +216,35 @@ public class SifService implements InitializingBean {
 				sb.append(Constants.raritys.get(sifCard.getRarity()));
 
 				sb.append("\n");
+
+				if (num == 1) {
+					String retjson = HttpClientUtil
+							.httpGetRequest("https://card.niconi.co.ni/cardApi/" + sifCard.getUnitNumber());
+
+					try {
+						JSONObject root = new JSONObject(retjson);
+
+						JSONObject unit = root.getJSONObject("unit");
+
+						String normalCardId = unit.getString("normal_card_id");
+						String rankMaxCardId = unit.getString("rank_max_card_id");
+
+						sb.append("未觉醒卡片封面:");
+						sb.append("https://card.niconi.co.ni/card/v4/");
+						sb.append(normalCardId);
+						sb.append(".png");
+						sb.append("\n");
+						sb.append("觉醒卡片封面:");
+						sb.append("https://card.niconi.co.ni/card/v4/");
+						sb.append(rankMaxCardId);
+						sb.append(".png");
+						sb.append("\n");
+
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			});
 
 			return sb.toString();
