@@ -217,7 +217,7 @@ public class SifService implements InitializingBean {
 
 				sb.append("\n");
 
-				if (num == 1) {
+				if (num == 1 || sifCard.getRarity() > 2) {
 					String retjson = HttpClientUtil
 							.httpGetRequest("https://card.niconi.co.ni/cardApi/" + sifCard.getUnitNumber());
 
