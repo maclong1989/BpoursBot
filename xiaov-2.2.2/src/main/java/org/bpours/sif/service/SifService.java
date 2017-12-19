@@ -184,9 +184,9 @@ public class SifService implements InitializingBean {
 				} else if (rand < 95) {
 					rarity = 3;
 				} else if (rand < 99) {
-					rarity = 4;
-				} else {
 					rarity = 5;
+				} else {
+					rarity = 4;
 				}
 
 				List<SifCards> list = currentGroup.get(rarity);

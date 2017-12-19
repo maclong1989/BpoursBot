@@ -11,8 +11,8 @@ public class Constants {
 		raritys.put(1, "N");
 		raritys.put(2, "R");
 		raritys.put(3, "SR");
-		raritys.put(4, "SSR");
-		raritys.put(5, "UR");
+		raritys.put(5, "SSR");
+		raritys.put(4, "UR");
 	}
 
 }
