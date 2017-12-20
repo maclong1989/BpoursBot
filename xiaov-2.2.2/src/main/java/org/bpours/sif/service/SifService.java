@@ -158,9 +158,10 @@ public class SifService implements InitializingBean {
 
 		try {
 
-			String[] searches = keyword.trim().split("\\s+", 2);
+			String[] searches = keyword.trim().split("\\s+");
 
 			String type = searches[1];
+			String xiyou = searches.length>2?searches[2]:null;
 
 			Map<Integer, List<SifCards>> currentGroup = null;
 
@@ -173,20 +174,36 @@ public class SifService implements InitializingBean {
 			}
 
 			List<Integer> ids = new ArrayList<>();
+			int rand = 0;
 
 			for (int i = 0; i < num; i++) {
-				int rand = RandomUtils.nextInt(100);
-
+				
 				Integer rarity = null;
+				
+				if(xiyou == null){
+				
+					rand = RandomUtils.nextInt(100);
 
-				if (rand < 90) {
-					rarity = 2;
-				} else if (rand < 95) {
-					rarity = 3;
-				} else if (rand < 99) {
-					rarity = 5;
-				} else {
-					rarity = 4;
+					if (rand < 90) {
+						rarity = 2;
+					} else if (rand < 95) {
+						rarity = 3;
+					} else if (rand < 99) {
+						rarity = 5;
+					} else {
+						rarity = 4;
+					}
+				}else if(num == 1){
+					
+					if(xiyou.equals("R")){
+						rarity = 2;
+					}else if(xiyou.equals("SR")){
+						rarity = 3;
+					}else if(xiyou.equals("SSR")){
+						rarity = 5;
+					}else if(xiyou.equals("UR")){
+						rarity = 4;
+					}
 				}
 
 				List<SifCards> list = currentGroup.get(rarity);
